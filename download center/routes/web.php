@@ -2,10 +2,11 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class,'user'])->name('user');
+
+Route::get('/logout', [HomeController::class,'logout'])->name('logout');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -1,120 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Login 04</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<!DOCTYPE html>
-<html lang="fa">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ثبت‌نام</title>
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
-            padding: 40px;
-            direction: rtl;
-        }
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+	</head>
+	<body>
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<h2 class="heading-section">ثبت نام در سایت</h2>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-12 col-lg-10">
+					<div class="wrap d-md-flex">
+						<div class="img" style="background-image: url({{ asset('images/bg-1.jpg') }});">
+			      </div>
+						<div class="login-wrap p-4 p-md-5">
+			      	<div class="d-flex">
+			      		<div class="w-100">
+			      			<h3 class="mb-4">Sign up</h3>
+			      		</div>
+								<div class="w-100">
+									<p class="social-media d-flex justify-content-end">
+										<a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
+										<a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
+									</p>
+								</div>
+			      	</div>
+							<form method="POST" action="{{ route('register') }}" class="signin-form">
+                                @csrf
+			      		<div class="form-group mb-3">
+			      			<label class="label" for="name">name</label>
+			      			<input type="text" class="form-control" name="name" placeholder="name" required>
+			      		</div>
+                          <div class="form-group mb-3">
+                            <label class="label" for="name">email</label>
+                            <input type="email" class="form-control" name="email" placeholder="email" required>
+                        </div>
+		            <div class="form-group mb-3">
+		            	<label class="label" for="password">Password</label>
+		              <input type="password" name="password" class="form-control" placeholder="Password" required>
+		            </div>
 
-        .container h2 {
-            text-align: center;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-        }
+                    <div class="form-group mb-3">
+		            	<label class="label" for="password">confirm password</label>
+		              <input type="password" name="password_confirmation" class="form-control" placeholder="confirm password" required>
+		            </div>
+		            <div class="form-group">
+		            	<button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign Up</button>
+		            </div>
+		            <div class="form-group d-md-flex">
+		            	<div class="w-50 text-left">
+			            	<label class="checkbox-wrap checkbox-primary mb-0">Remember Me
+									  <input type="checkbox" checked>
+									  <span class="checkmark"></span>
+										</label>
+									</div>
+									<div class="w-50 text-md-right">
+										<a href="#">Forgot Password</a>
+									</div>
+		            </div>
+		          </form>
+		          <p class="text-center">Not a member? <a data-toggle="tab" href="#signup">Sign Up</a></p>
+		        </div>
+		      </div>
+				</div>
+			</div>
+		</div>
+	</section>
 
-        .form-group {
-            margin-bottom: 15px;
-        }
+	<script src="{{ asset('js/jquery.min.js') }}"></script>
+  <script src="{{ asset('js/popper.js') }}"></script>
+  <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('js/main.js') }}"></script>
 
-        .form-label {
-            font-size: 1rem;
-            font-weight: bold;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 10px;
-            font-size: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-top: 5px;
-        }
-
-        .form-control:focus {
-            border-color: #007bff;
-            outline: none;
-        }
-
-        .btn-primary {
-            width: 100%;
-            padding: 12px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-
-        .invalid-feedback {
-            font-size: 0.9rem;
-            color: red;
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <h2>فرم ثبت‌نام</h2>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
-
-        <div class="form-group">
-            <label for="name" class="form-label">نام</label>
-            <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required>
-            @error('name')
-                <span class="invalid-feedback">{{ $message }}</span>
-            @enderror
-        </div>
-
-        <div class="form-group">
-            <label for="email" class="form-label">ایمیل</label>
-            <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" required>
-            @error('email')
-                <span class="invalid-feedback">{{ $message }}</span>
-            @enderror
-        </div>
-
-        <div class="form-group">
-            <label for="password" class="form-label">رمز عبور</label>
-            <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" required>
-            @error('password')
-                <span class="invalid-feedback">{{ $message }}</span>
-            @enderror
-        </div>
-
-        <div class="form-group">
-            <label for="password_confirmation" class="form-label">تایید رمز عبور</label>
-            <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" required>
-        </div>
-
-        <div>
-            <button type="submit" class="btn-primary">ثبت‌نام</button>
-        </div>
-    </form>
-</div>
-
-</body>
+	</body>
 </html>
+
