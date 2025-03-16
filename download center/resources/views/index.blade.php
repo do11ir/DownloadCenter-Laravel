@@ -42,7 +42,14 @@
           <li class="nav-item ">
             <a class="nav-link" href="./user.html">
               <i class="material-icons">person</i>
-              <p>User Profile</p>
+              @if (Auth::user()->role == 'admin')
+              <p>Admin Profile</p>
+              @elseif  (Auth::user()->role == 'master')
+              <p>Master Profile</p>
+              @else
+              <p>Student Profile</p>
+              @endif
+             
             </a>
           </li>
           <li class="nav-item ">

@@ -41,7 +41,8 @@
                                 @csrf
 			      		<div class="form-group mb-3">
 			      			<label class="label" for="name">Username</label>
-			      			<input type="email" name="email" class="form-control" placeholder="email" required>
+			      			
+							  <input type="text" name="login" class="form-control" placeholder="ایمیل یا کد داشجویی" required autofocus>
 			      		</div>
 		            <div class="form-group mb-3">
 		            	<label class="label" for="password">Password</label>

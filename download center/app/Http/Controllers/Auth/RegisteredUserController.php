@@ -31,14 +31,22 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'role' => ['required', 'in:student,master'],
+            'student_id' => ['nullable', 'unique:users,student_id', 'required_if:role,student'],
+            'master_id' => ['nullable', 'unique:users,master_id', 'required_if:role,master'],
+           
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => $request->role,
+            'student_id' => $request->student_id,
+            'master_id' => $request->master_id,
+            'approved' => $request->role === 'master' ? false : true, // استاد نیاز به تایید دارد
         ]);
 
         event(new Registered($user));

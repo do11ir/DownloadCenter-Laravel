@@ -56,15 +56,43 @@
 		            	<label class="label" for="password">confirm password</label>
 		              <input type="password" name="password_confirmation" class="form-control" placeholder="confirm password" required>
 		            </div>
+
+					<div>
+						<label for="role">نقش خود را انتخاب کنید:</label>
+						<select name="role" id="role">
+							<option value="student">دانشجو</option>
+							<option value="master">استاد</option>
+						</select>
+					</div>
+					
+					<div id="student_fields">
+						<label for="student_id">کد دانشجویی:</label>
+						<input type="text" name="student_id" id="student_id">
+					</div>
+					
+					<div id="master_fields" style="display:none;">
+						<label for="master_id">کد استادی:</label>
+						<input type="text" name="master_id" id="master_id">
+						
+					</div>
+					
+					<script>
+						document.getElementById("role").addEventListener("change", function() {
+							if (this.value === "master") {
+								document.getElementById("master_fields").style.display = "block";
+								document.getElementById("student_fields").style.display = "none";
+							} else {
+								document.getElementById("master_fields").style.display = "none";
+								document.getElementById("student_fields").style.display = "block";
+							}
+						});
+					</script>
 		            <div class="form-group">
 		            	<button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign Up</button>
 		            </div>
 		            <div class="form-group d-md-flex">
 		            	<div class="w-50 text-left">
-			            	<label class="checkbox-wrap checkbox-primary mb-0">Remember Me
-									  <input type="checkbox" checked>
-									  <span class="checkmark"></span>
-										</label>
+			       
 									</div>
 									<div class="w-50 text-md-right">
 										<a href="#">Forgot Password</a>

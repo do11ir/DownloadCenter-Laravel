@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MasterController;
+use App\Http\Middleware\RoleMiddleware;
 
 Route::get('/', [HomeController::class,'user'])->name('user');
 
@@ -19,3 +22,29 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+
+
+Route::middleware(['auth', RoleMiddleware::class . ':admin'])
+    ->group(function () {
+        Route::get('/AdminProfile', [AdminController::class, 'AdminProfile'])->name('AdminProfile');
+       
+    });
+
+
+
+
+    Route::middleware(['auth', RoleMiddleware::class . ':master'])
+    ->group(function () {
+        Route::get('/MasterProfile', [MasterController::class, 'MasterProfile'])->name('MasterProfile');
+       
+    });
+
+
+
+
+    Route::middleware(['auth', RoleMiddleware::class . ':student'])
+    ->group(function () {
+        Route::get('/StudentProfile', [HomeController::class, 'StudentProfile'])->name('StudentProfile');
+    });

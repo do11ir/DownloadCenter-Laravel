@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
     /**
-     * Display the login view.
+     * نمایش صفحه ورود
      */
     public function create(): View
     {
@@ -20,26 +20,41 @@ class AuthenticatedSessionController extends Controller
     }
 
     /**
-     * Handle an incoming authentication request.
+     * بررسی ورود کاربر (با ایمیل یا کد دانشجویی)
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
-        $request->authenticate();
+        // اعتبارسنجی مقدار ورودی
+        $request->validate([
+            'login'    => 'required|string',
+            'password' => 'required|string',
+        ]);
 
-        $request->session()->regenerate();
+        $loginInput = $request->input('login');
 
-        return redirect()->intended(route('user'));
+        // تشخیص خودکار: ایمیل است یا کد دانشجویی؟
+        $fieldType = filter_var($loginInput, FILTER_VALIDATE_EMAIL) ? 'email' : 'student_id';
+
+        // تلاش برای ورود
+        if (Auth::attempt([$fieldType => $loginInput, 'password' => $request->password])) {
+            $request->session()->regenerate();
+            return redirect()->intended(route('user')); // هدایت به داشبورد
+        }
+
+        // ارور لاگین در صورت نامعتبر بودن اطلاعات
+        throw ValidationException::withMessages([
+            'login' => __('اطلاعات وارد شده صحیح نیست.'),
+        ]);
     }
 
     /**
-     * Destroy an authenticated session.
+     * خروج از حساب کاربری
      */
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
         return redirect('/');

@@ -21,4 +21,9 @@ class HomeController extends Controller
 
         return redirect(route('user')); // بعد از خروج کاربر را به صفحه لاگین بفرست
     }
+
+    public function StudentProfile()
+    {
+        return view('StudentProfile');
+    }
 }
