@@ -36,50 +36,66 @@
           <li class="nav-item active  ">
             <a class="nav-link" href="./dashboard.html">
               <i class="material-icons">dashboard</i>
-              <p>Dashboard</p>
+              <p>داشبورد</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./user.html">
-              <i class="material-icons">person</i>
-              @if (Auth::user()->role == 'admin')
-              <p>Admin Profile</p>
-              @elseif  (Auth::user()->role == 'master')
-              <p>Master Profile</p>
-              @else
-              <p>Student Profile</p>
-              @endif
-             
+          
+            
+            @if(Auth::user())
+            @if (Auth::user()->role == 'admin')
+            <a class="nav-link" href="{{ route('AdminProfile') }}">
+            <i class="material-icons">person</i>
+            <p>پروفایل ادمین</p>
+            @elseif  (Auth::user()->role == 'master')
+            <a class="nav-link" href="{{ route('MasterProfile') }}">
+            <i class="material-icons">person</i>
+            <p>پروفایل استاد</p>
+            @else
+            <a class="nav-link" href="{{ route('StudentProfile') }}">
+            <i class="material-icons">person</i>
+            <p>پروفایل دانشجو</p>
+            @endif
+         @endif 
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="./tables.html">
               <i class="material-icons">content_paste</i>
-              <p>Table List</p>
+              <p>پیام به ادمین</p>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="./typography.html">
               <i class="material-icons">library_books</i>
-              <p>Typography</p>
+              <p>پیام به اساتید</p>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="./icons.html">
               <i class="material-icons">bubble_chart</i>
-              <p>Icons</p>
+              <p>همه دانلود ها</p>
             </a>
           </li>
+          @if(Auth::user())
           <li class="nav-item ">
-            <a class="nav-link" href="./map.html">
+            <a class="nav-link" href="{{ route('logout') }}">
               <i class="material-icons">location_ons</i>
-              <p>Maps</p>
+              <p>خروج</p>
             </a>
           </li>
+          @else
+          <li class="nav-item ">
+            <a class="nav-link" href="{{ route('login') }}">
+              <i class="material-icons">location_ons</i>
+              <p>ورود</p>
+            </a>
+          </li>
+          @endif
           <li class="nav-item ">
             <a class="nav-link" href="./notifications.html">
               <i class="material-icons">notifications</i>
-              <p>Notifications</p>
+              <p>اطلاعیه ها</p>
             </a>
           </li>
           <!-- <li class="nav-item active-pro ">
