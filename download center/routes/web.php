@@ -29,6 +29,8 @@ require __DIR__.'/auth.php';
 Route::middleware(['auth', RoleMiddleware::class . ':admin'])
     ->group(function () {
         Route::get('/AdminProfile', [AdminController::class, 'AdminProfile'])->name('AdminProfile');
+        // Route::get('/AdminProfile/AddStudyField', [AdminController::class, 'AddStudyField'])->name('AddStudyField');
+        Route::get('/AddStudyField', [AdminController::class, 'AddStudyField'])->name('AddStudyField');
        
     });
 
