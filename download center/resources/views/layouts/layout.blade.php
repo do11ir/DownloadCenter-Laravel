@@ -310,5 +310,14 @@ dropdown.addEventListener("click", function (e) {
 });
 });
 </script>
+
+<script>
+    document.querySelectorAll('.dropdown-item').forEach(function(item) {
+        item.addEventListener('click', function() {
+            const selectedValue = this.getAttribute('data-value');
+            document.getElementById('studyFieldInput').value = selectedValue;
+        });
+    });
+</script>
 </body>
 </html>

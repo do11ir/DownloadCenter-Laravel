@@ -29,10 +29,13 @@ require __DIR__.'/auth.php';
 Route::middleware(['auth', RoleMiddleware::class . ':admin'])
     ->group(function () {
         Route::get('/AdminProfile', [AdminController::class, 'AdminProfile'])->name('AdminProfile');
+
         Route::get('/AdminProfile/AddStudyField', [AdminController::class, 'AddStudyField'])->name('AddStudyField');
         Route::post('/AdminProfile/AddStudyField/insertStudyField', [AdminController::class, 'insertStudyField'])->name('insertStudyField');
         Route::get('/AdminProfile/AddStudyField/deleteStudyField/{id}', [AdminController::class,'deleteStudyField'])->name('deleteStudyField');
 
+        Route::get('/AdminProfile/AddSubject', [AdminController::class, 'AddSubject'])->name('AddSubject');
+        Route::post('/AdminProfile/AddSubject/insertSubject', [AdminController::class, 'insertSubject'])->name('insertSubject');
     });
 
 
