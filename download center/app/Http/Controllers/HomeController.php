@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\studyField;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -10,7 +10,8 @@ class HomeController extends Controller
 {
     public function user()
     {
-        return view('index');
+        $studyField = studyField::all();
+        return view('index' , compact('studyField'));
     }
 
     public function logout(Request $request)

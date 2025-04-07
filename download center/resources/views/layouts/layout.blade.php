@@ -5,19 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <title>دانلود سنتر مجتمع آموزش عالی لارستان</title>
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico"/>
-    <link href="assets/css/loader.css" rel="stylesheet" type="text/css" />
-    <script src="assets/js/loader.js"></script>
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}"/>
+    <link href="{{ asset('assets/css/loader.css') }}" rel="stylesheet" type="text/css" />
+    <script src="{{ asset('assets/js/loader.js') }}"></script>
 
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&display=swap" rel="stylesheet">
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/plugins.css') }}" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
 
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
-    <link href="plugins/apex/apexcharts.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/dashboard/dash_2.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('plugins/apex/apexcharts.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/css/dashboard/dash_2.css') }}" rel="stylesheet" type="text/css" />
     <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
 
 </head>
@@ -35,7 +35,7 @@
             <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></a>
 
             <div class="nav-logo align-self-center">
-                <a class="navbar-brand" href="index.html"><img alt="logo" src="assets/img/90x90.jpg"> <span class="navbar-brand-name">مرکز دانلود مجتمع آموزش عالی لارستان </span></a>
+                <a class="navbar-brand" href="index.html"><img alt="logo" src="{{ asset('assets/img/90x90.jpg') }}"> <span class="navbar-brand-name">مرکز دانلود مجتمع آموزش عالی لارستان </span></a>
             </div>
 
             <ul class="navbar-item flex-row mr-auto">
@@ -56,7 +56,7 @@
                 <li class="nav-item dropdown user-profile-dropdown order-lg-0 order-1">
                     <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="user-profile-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="media">
-                            <img src="assets/img/90x90.jpg" class="img-fluid" alt="admin-profile">
+                            <img src="{{ asset('assets/img/90x90.jpg') }}" class="img-fluid" alt="admin-profile">
                             <div class="media-body align-self-center">
                                 @if(Auth::user())
                                 <h6><span>سلام  </span>{{ Auth::user()->name }}</h6>
@@ -118,7 +118,7 @@
                 <ul class="navbar-nav theme-brand flex-row  text-center">
                     <li class="nav-item theme-logo">
                         <a href="index.html">
-                            <img src="assets/img/90x90.jpg" class="navbar-logo" alt="logo">
+                            <img src="{{ asset('assets/img/90x90.jpg') }}" class="navbar-logo" alt="logo">
                         </a>
                     </li>
                     <li class="nav-item theme-text">
@@ -169,15 +169,11 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
                         </a>
                         <ul class="collapse submenu list-unstyled" id="components" data-parent="#topAccordion">
+                            @foreach($studyField as $field)
                             <li>
-                                <a href="component_tabs.html"> مهندسی کامپیوتر </a>
+                                <a href="component_tabs.html">{{ $field->name }}</a>
                             </li>
-                            <li>
-                                <a href="component_tabs.html"> مهندسی برق </a>
-                            </li>
-                            <li>
-                                <a href="component_tabs.html"> مهندسی مکانیک </a>
-                            </li>
+                            @endforeach
                             
                         </ul>
                     </li>
@@ -270,22 +266,22 @@
 <!-- END MAIN CONTAINER -->
 
 <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
-<script src="assets/js/libs/jquery-3.1.1.min.js"></script>
-<script src="bootstrap/js/popper.min.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
-<script src="plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-<script src="assets/js/app.js"></script>
+<script src="{{ asset('assets/js/libs/jquery-3.1.1.min.js') }}"></script>
+<script src="{{ asset('bootstrap/js/popper.min.js') }}"></script>
+<script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('plugins/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+<script src="{{ asset('assets/js/app.js') }}"></script>
 <script>
 $(document).ready(function() {
     App.init();
 });
 </script>
-<script src="assets/js/custom.js"></script>
+<script src="{{ asset ('assets/js/custom.js') }}"></script>
 <!-- END GLOBAL MANDATORY SCRIPTS -->
 
 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-<script src="plugins/apex/apexcharts.min.js"></script>
-<script src="assets/js/dashboard/dash_2.js"></script>
+<script src="{{ asset('plugins/apex/apexcharts.min.js') }}"></script>
+<script src="{{ asset('assets/js/dashboard/dash_2.js') }}"></script>
 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
