@@ -11,9 +11,11 @@ class AdminController extends Controller
 {
     public function AdminProfile()
     {
+        $userStudent = User::where('role','=','student')->get();
         $studyField = studyField::all();
+        $subject = subject::all();
         $user = User::where('role','=','master')->get();
-        return view('AdminProfile' , compact('user' , 'studyField'));
+        return view('AdminProfile' , compact('user' , 'studyField' , 'subject' , 'user' , 'userStudent'));
     }
 
     public function AddStudyField()

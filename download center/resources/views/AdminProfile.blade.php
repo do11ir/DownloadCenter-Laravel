@@ -128,34 +128,29 @@
                 <ul class="list-unstyled menu-categories" id="topAccordion">
 
                     <li class="menu single-menu active">
-                        <a href="#dashboard" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle autodroprown">
+                        <a href="{{ route('user') }}" aria-expanded="true" class="dropdown-toggle autodroprown">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                                 <span>داشبورد</span>
                             </div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
                         </a>
-                       
                     </li>
 
                     <li class="menu single-menu">
                         <a href="#app" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-cpu"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
-                                <span>دسته بندی</span>
+                                <span>درس ها</span>
                             </div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
                         </a>
                         <ul class="collapse submenu list-unstyled" id="app" data-parent="#topAccordion">
+                            @foreach($subject as $subjects)
                             <li>
-                                <a href="apps_chat.html"> ویدیو  </a>
+                                <a href="apps_chat.html">{{ $subjects->name }}</a>
                             </li>
-                            <li>
-                                <a href="apps_chat.html"> برنامه  </a>
-                            </li>
-                            <li>
-                                <a href="apps_chat.html"> جزوه  </a>
-                            </li>
+                            @endforeach
                         </ul>
                     </li>
                     
@@ -168,16 +163,11 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
                         </a>
                         <ul class="collapse submenu list-unstyled" id="components" data-parent="#topAccordion">
+                            @foreach($studyField as $field)
                             <li>
-                                <a href="component_tabs.html"> مهندسی کامپیوتر </a>
+                                <a href="component_tabs.html">{{ $field->name }}</a>
                             </li>
-                            <li>
-                                <a href="component_tabs.html"> مهندسی برق </a>
-                            </li>
-                            <li>
-                                <a href="component_tabs.html"> مهندسی مکانیک </a>
-                            </li>
-                            
+                            @endforeach
                         </ul>
                     </li>
 
@@ -406,6 +396,8 @@
                                         </div>
                    {{-- ---------------------------------------------------student start------------------------------------------- --}}
                                         <div class="todo-item todo-task-student">
+                                            @foreach($userStudent as $use)
+                                             {{-- @if($users->role == "student") --}}
                                             <div class="todo-item-inner">
                                                 <div class="n-chk text-center">
                                                     <label class="new-control ">
@@ -415,7 +407,7 @@
                                                 </div>
 
                                                 <div class="todo-content">
-                                                    <h5 class="todo-heading" data-todoHeading="New User Registered">لیست دانشجو ها</h5>
+                                                    <h5 class="todo-heading" data-todoHeading="New User Registered">{{ $use->name }}</h5>
                                                     <p class="meta-date">Sep, 31 2019</p>
                                                     <p class="todo-text" data-todoHtml="<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pulvinar feugiat consequat. Duis lacus nibh, sagittis id varius vel, aliquet non augue. Vivamus sem ante, ultrices at ex a, rhoncus ullamcorper tellus. Nunc iaculis eu ligula ac consequat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum mattis urna neque, eget posuere lorem tempus non. Suspendisse ac turpis dictum, convallis est ut, posuere sem. Etiam imperdiet aliquam risus, eu commodo urna vestibulum at. Suspendisse malesuada lorem eu sodales aliquam.</p>" data-todoText="This task is for trashed demo. Now, click the dotted dropdown and select the revive option to re-list the task from trash to all list or select the premanent delete option to permantly delete it.">This task is for trashed demo. Now, click the dotted dropdown and select the revive option to re-list the task from trash to all list or select the premanent delete option to permantly delete it. </p>
                                                 </div>
@@ -450,11 +442,14 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                             {{-- @endif --}}
+                                            @endforeach
                                         </div>
 
                                          {{-- ---------------------------------------------------category start------------------------------------------- --}}
                                          <div class="todo-item todo-task-category">
                                             <a class="btn" id="addTask" href="{{ route('AddSubject') }}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>درس جدید</a>
+                                            @foreach($subject as $subjects)
                                             <div class="todo-item-inner">
                                                 <div class="n-chk text-center">
                                                     <label class="new-control ">
@@ -462,43 +457,13 @@
                                                       <span class="new-control-indicator"></span>
                                                     </label>
                                                 </div>
-
+                                                
                                                 <div class="todo-content">
-                                                    <h5 class="todo-heading" data-todoHeading="New User Registered">لیست درس ها</h5>
-                                                    <p class="meta-date">Sep, 31 2019</p>
-                                                    <p class="todo-text" data-todoHtml="<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pulvinar feugiat consequat. Duis lacus nibh, sagittis id varius vel, aliquet non augue. Vivamus sem ante, ultrices at ex a, rhoncus ullamcorper tellus. Nunc iaculis eu ligula ac consequat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum mattis urna neque, eget posuere lorem tempus non. Suspendisse ac turpis dictum, convallis est ut, posuere sem. Etiam imperdiet aliquam risus, eu commodo urna vestibulum at. Suspendisse malesuada lorem eu sodales aliquam.</p>" data-todoText="This task is for trashed demo. Now, click the dotted dropdown and select the revive option to re-list the task from trash to all list or select the premanent delete option to permantly delete it.">This task is for trashed demo. Now, click the dotted dropdown and select the revive option to re-list the task from trash to all list or select the premanent delete option to permantly delete it. </p>
-                                                </div>
-
-                                                <div class="priority-dropdown custom-dropdown-icon">
-                                                    <div class="dropdown p-dropdown">
-                                                        <a class="dropdown-toggle warning" href="#" role="button" id="dropdownMenuLink-18" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-octagon"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16"></line></svg>
-                                                        </a>
-
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink-18">
-                                                            <a class="dropdown-item danger" href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-octagon"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16"></line></svg> High</a>
-                                                            <a class="dropdown-item warning" href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-octagon"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16"></line></svg> Middle</a>
-                                                            <a class="dropdown-item primary" href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-octagon"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16"></line></svg> Low</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="action-dropdown custom-dropdown-icon">
-                                                    <div class="dropdown">
-                                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink-19" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
-                                                        </a>
-
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink-19">
-                                                            <a class="edit dropdown-item" href="javascript:void(0);">Edit</a>
-                                                            <a class="important dropdown-item" href="javascript:void(0);">Important</a>
-                                                            <a class="dropdown-item delete" href="javascript:void(0);">Delete</a>
-                                                            <a class="dropdown-item permanent-delete" href="javascript:void(0);">Permanent Delete</a>
-                                                            <a class="dropdown-item revive" href="javascript:void(0);">Revive Task</a>
-                                                        </div>
-                                                    </div>
+                                                    <h5 class="todo-heading" data-todoHeading="New User Registered">{{ $subjects->name }}</h5>
+                                                    <p class="meta-date">{{ $field->created_at ? \Morilog\Jalali\Jalalian::fromCarbon(\Carbon\Carbon::parse($field->created_at))->format('j F Y') : 'منتشر نشده' }}</p>
                                                 </div>
                                             </div>
+                                            @endforeach
                                         </div>
 
                                          {{-- ---------------------------------------------------studyField start------------------------------------------- --}}
