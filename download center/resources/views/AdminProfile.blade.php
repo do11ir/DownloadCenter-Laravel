@@ -563,9 +563,17 @@
                                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink-{{ $users->id }}-actions">
                                                                 <a class=" dropdown-item" href="#">مشاهده</a>
                                                                 @if($users->approved == 0)
-                                                                <a class=" dropdown-item" href="#">تایید</a>
+                                                                <form action="{{ route('masterApprove', ['id' => $users->id])  }}" method="POST">
+                                                                    @csrf
+                                                                <input type="hidden" name="approved" value="1">
+                                                                <button class="dropdown-item" type="submit">تایید</button>
+                                                                </form>
                                                                 @else
-                                                                <a class=" dropdown-item" href="#">غیر فعال</a>
+                                                                <form action="{{ route('masterApprove', ['id' => $users->id]) }}" method="POST">
+                                                                    @csrf
+                                                                    <input type="hidden" name="approved" value="0">
+                                                                <button class="dropdown-item" type="submit">غیر فعال</button>
+                                                                </form>
                                                                 @endif
                                                                 <a class="dropdown-item " href="#">حذف</a>
                                                                

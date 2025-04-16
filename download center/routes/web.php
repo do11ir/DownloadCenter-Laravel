@@ -36,6 +36,8 @@ Route::middleware(['auth', RoleMiddleware::class . ':admin'])
 
         Route::get('/AdminProfile/AddSubject', [AdminController::class, 'AddSubject'])->name('AddSubject');
         Route::post('/AdminProfile/AddSubject/insertSubject', [AdminController::class, 'insertSubject'])->name('insertSubject');
+
+        Route::post('/AdminProfile/masterApprove/{id}', [AdminController::class, 'masterApprove'])->name('masterApprove');
     });
 
 

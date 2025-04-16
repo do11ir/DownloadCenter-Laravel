@@ -64,4 +64,14 @@ class AdminController extends Controller
             
         return redirect(route('AddSubject' , compact('studyField' , 'subject')));
     }
+
+    public function masterApprove(Request $request)
+    {
+        $master = User::findOrFail($request->id);
+        
+        $master ->approved = $request->approved;
+        $master->update();
+        return redirect(route('AdminProfile'));
+        
+    }
 }
