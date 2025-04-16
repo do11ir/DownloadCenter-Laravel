@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\notice;
 use App\Models\studyField;
 use App\Models\subject;
 use App\Models\User;
@@ -11,11 +12,12 @@ class AdminController extends Controller
 {
     public function AdminProfile()
     {
+        $notice = notice::all();
         $userStudent = User::where('role','=','student')->get();
         $studyField = studyField::all();
         $subject = subject::all();
         $user = User::where('role','=','master')->get();
-        return view('AdminProfile' , compact('user' , 'studyField' , 'subject' , 'user' , 'userStudent'));
+        return view('AdminProfile' , compact('user' , 'studyField' , 'subject' , 'userStudent' , 'notice'));
     }
 
     public function AddStudyField()
@@ -72,6 +74,42 @@ class AdminController extends Controller
         $master ->approved = $request->approved;
         $master->update();
         return redirect(route('AdminProfile'));
-        
     }
+
+    public function AddNotice()
+    {
+        $notice = notice::all();
+        $studyField = studyField::all();
+        $subject = subject::all();
+        $user = User::where('role','=','master')->get();
+        return view('AdminViews.AddNotice' , compact('user' , 'studyField' , 'subject' , 'notice'));
+    }
+
+
+
+
+
+
+
+
+
+
+
+    /*--------------------------this is only for text editor-------------------*/
+public function upload(Request $request)
+{
+    if ($request->hasFile('upload')) {
+        $originName = $request->file('upload')->getClientOriginalName();
+        $fileName = pathinfo($originName, PATHINFO_FILENAME);
+        $extension = $request->file('upload')->getClientOriginalExtension();
+        $fileName = $fileName . '_' . time() . '.' . $extension;
+
+        $request->file('upload')->move(public_path('img'), $fileName);
+
+        $url = asset('img/' . $fileName);
+        return response()->json(['fileName' => $fileName, 'uploaded' => 1, 'url' => $url]);
+    }
+
+    return response()->json(['uploaded' => 0, 'error' => ['message' => 'No file uploaded']]);
+}
 }
