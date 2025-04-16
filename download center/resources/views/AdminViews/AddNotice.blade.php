@@ -1,6 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
+
 <div id="content" class="main-content">
     <div class="container">
 
@@ -25,10 +26,28 @@
 
                             <div class="form-group mb-4">
                                 <label for="notice_body">متن اطلاعیه</label>
-                                <textarea name="body" class="form-control" id="notice_body" rows="5" placeholder="متن کامل اطلاعیه را اینجا وارد کنید..."></textarea>
+                                <textarea name="body"  id="editor" rows="5" placeholder="متن کامل اطلاعیه را اینجا وارد کنید..."></textarea>
                             </div>
 
                             <button type="submit" class="btn btn-primary mt-3">ثبت اطلاعیه</button>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="notice_image">تصویر اطلاعیه</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="notice_image" name="image">
+                                <label class="custom-file-label" for="notice_image">انتخاب تصویر...</label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group mb-4">
+                            <label for="category">دسته‌بندی اطلاعیه</label>
+                            <select class="form-control" id="category" name="category">
+                                <option value="">انتخاب کنید</option>
+                                <option value="عمومی">عمومی</option>
+                                <option value="آموزشی">آموزشی</option>
+                                <option value="فرهنگی">فرهنگی</option>
+                                <option value="مالی">مالی</option>
+                            </select>
                         </div>
                     </div>
                 </div>
