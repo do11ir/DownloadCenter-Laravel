@@ -7,6 +7,7 @@ use App\Models\studyField;
 use App\Models\subject;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -83,6 +84,34 @@ class AdminController extends Controller
         $subject = subject::all();
         $user = User::where('role','=','master')->get();
         return view('AdminViews.AddNotice' , compact('user' , 'studyField' , 'subject' , 'notice'));
+    }
+
+    public function insertNotice(Request $request)
+    {
+        $request->validate([
+            'Title' => 'required|string|max:255',
+            'Content' => 'required',
+            'Image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
+        ]);
+    
+        // ذخیره تصویر شاخص اگر موجود بود
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = time() . '-' . $request->file('image')->getClientOriginalName();
+            $request->file('image')->move(public_path('img'), $imagePath);
+        }
+    
+       
+        notice::create([
+            'Title' => $request->title,
+            'Content' => $request->content,
+            'Author_Name' => Auth::user()->name,
+            'Image' => $imagePath,
+            'Field_Category' => $request->field_category
+        ]);
+    
+        return redirect()->route('AdminProfile')->with('success', 'اطلاعیه جدید ایجاد شد.');
+
     }
 
 

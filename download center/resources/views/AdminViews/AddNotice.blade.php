@@ -5,7 +5,7 @@
 <div id="content" class="main-content">
     <div class="container">
 
-        <form action="#" method="POST">
+        <form action="{{ route('insertNotice') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row layout-top-spacing">
                 <div class="col-12">
@@ -26,10 +26,10 @@
 
                             <div class="form-group mb-4">
                                 <label for="notice_body">متن اطلاعیه</label>
-                                <textarea name="body"  id="editor" rows="5" placeholder="متن کامل اطلاعیه را اینجا وارد کنید..."></textarea>
+                                <textarea name="content"  id="editor" rows="5" placeholder="متن کامل اطلاعیه را اینجا وارد کنید..."></textarea>
                             </div>
 
-                            <button type="submit" class="btn btn-primary mt-3">ثبت اطلاعیه</button>
+                           
                         </div>
                         <div class="form-group mb-4">
                             <label for="notice_image">تصویر اطلاعیه</label>
@@ -41,7 +41,7 @@
                         
                         <div class="form-group mb-4">
                             <label for="category">دسته‌بندی اطلاعیه</label>
-                            <select class="form-control" id="category" name="category">
+                            <select class="form-control" id="category" name="field_category">
                                 <option value="">انتخاب کنید</option>
                                 <option value="عمومی">عمومی</option>
                                 <option value="آموزشی">آموزشی</option>
@@ -49,6 +49,7 @@
                                 <option value="مالی">مالی</option>
                             </select>
                         </div>
+                        <button type="submit" class="btn btn-primary mt-3">ثبت اطلاعیه</button>
                     </div>
                 </div>
             </div>

@@ -286,6 +286,7 @@ $(document).ready(function() {
 <script src="{{ asset('assets/js/dashboard/dash_2.js') }}"></script>
 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 <script>
+    
 document.addEventListener("DOMContentLoaded", function () {
 let dropdowns = document.querySelectorAll(".dropdown-toggle");
 

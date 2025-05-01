@@ -40,6 +40,9 @@ Route::middleware(['auth', RoleMiddleware::class . ':admin'])
         Route::post('/AdminProfile/masterApprove/{id}', [AdminController::class, 'masterApprove'])->name('masterApprove');
 
         Route::get('/AdminProfile/AddNotice', [AdminController::class, 'AddNotice'])->name('AddNotice');
+        Route::post('/AdminProfile/AddNotice/insertNotice', [AdminController::class, 'insertNotice'])->name('insertNotice');
+            
+        
     });
 
 
