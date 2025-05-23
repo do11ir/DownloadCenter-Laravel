@@ -24,11 +24,11 @@
                                 <input type="text" name="title" class="form-control" id="notice_title" placeholder="مثال: اطلاعیه تعطیلی دانشگاه">
                             </div>
 
-                            <div class="form-group mb-4">
-                                <label for="notice_body">متن اطلاعیه</label>
-                                <textarea name="content"  id="editor" rows="5" placeholder="متن کامل اطلاعیه را اینجا وارد کنید..."></textarea>
-                            </div>
-
+                                    <div class="form-group mb-4">
+                                    <label for="notice_body">متن اطلاعیه</label>
+                                    <textarea name="content" required  style="height: 300px;width: 100%; border-radius: 10px; border-color: #1b2e4b ; background: #1b2e4b; color: rgb(231, 226, 226)"></textarea>
+            
+                             </div>
                            
                         </div>
                         <div class="form-group mb-4">
@@ -79,13 +79,13 @@
                                 <tbody>
                                     @foreach($notice as $notices)
                                     <tr>
-                                        <td>{{ $notices->title }}</td>
+                                        <td>{{ $notices->Title }}</td>
                                         <td>
-                                            {{ \Morilog\Jalali\Jalalian::fromCarbon($notice->created_at)->format('j F Y') }}
+                                             {{ $notices->created_at ? \Morilog\Jalali\Jalalian::fromCarbon(\Carbon\Carbon::parse($notices->created_at))->format('j F Y') : 'منتشر نشده' }}
                                         </td>
                                         <td>
-                                            <a href="{{ route('editNotice', $notices->id) }}" class="btn btn-outline-info btn-sm">ویرایش</a>
-                                            <a href="{{ route('deleteNotice', $notices->id) }}" class="btn btn-outline-danger btn-sm">حذف</a>
+                                            <a href="#" class="btn btn-outline-info btn-sm">ویرایش</a>
+                                            <a href="#" class="btn btn-outline-danger btn-sm">حذف</a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -109,4 +109,6 @@
 
     </div>
 </div>
+
+
 @endsection

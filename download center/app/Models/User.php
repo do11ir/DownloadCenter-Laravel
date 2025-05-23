@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\File;
 
 class User extends Authenticatable
 {
@@ -34,6 +35,10 @@ class User extends Authenticatable
 
     public function isStudent() {
         return $this->role === 'student';
+    }
+
+    public function files(){
+    return $this->hasMany(File::class);
     }
     /**
      * The attributes that should be hidden for serialization.

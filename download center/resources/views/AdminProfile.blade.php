@@ -281,10 +281,11 @@
                                             </ul>
                                         </div>
                                     </div>
-
-                                    <a class="btn" id="addTask" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>آپلود فایل جدید</a>
+                                   
                                 </div>
+                                 <a class="btn" style="background-color: #009688; color: black" href="{{ route('AddNewFile') }}">آپلود فایل جدید</a>
                             </div>
+                            
 
                             <div id="todo-inbox" class="accordion todo-inbox">
                                 <div class="search">
@@ -402,28 +403,14 @@
                                                 <div class="n-chk text-center">
                                                     <label class="new-control ">
                                                       <input  class="new-control-input ">
-                                                      <span class="new-control-indicator"></span>
+                                                      <span class="new-control-indicator"> </span>
                                                     </label>
                                                 </div>
 
                                                 <div class="todo-content">
                                                     <h5 class="todo-heading" data-todoHeading="New User Registered">{{ $use->name }}</h5>
-                                                    <p class="meta-date">Sep, 31 2019</p>
-                                                    <p class="todo-text" data-todoHtml="<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pulvinar feugiat consequat. Duis lacus nibh, sagittis id varius vel, aliquet non augue. Vivamus sem ante, ultrices at ex a, rhoncus ullamcorper tellus. Nunc iaculis eu ligula ac consequat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum mattis urna neque, eget posuere lorem tempus non. Suspendisse ac turpis dictum, convallis est ut, posuere sem. Etiam imperdiet aliquam risus, eu commodo urna vestibulum at. Suspendisse malesuada lorem eu sodales aliquam.</p>" data-todoText="This task is for trashed demo. Now, click the dotted dropdown and select the revive option to re-list the task from trash to all list or select the premanent delete option to permantly delete it.">This task is for trashed demo. Now, click the dotted dropdown and select the revive option to re-list the task from trash to all list or select the premanent delete option to permantly delete it. </p>
-                                                </div>
-
-                                                <div class="priority-dropdown custom-dropdown-icon">
-                                                    <div class="dropdown p-dropdown">
-                                                        <a class="dropdown-toggle warning" href="#" role="button" id="dropdownMenuLink-18" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-octagon"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16"></line></svg>
-                                                        </a>
-
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink-18">
-                                                            <a class="dropdown-item danger" href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-octagon"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16"></line></svg> High</a>
-                                                            <a class="dropdown-item warning" href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-octagon"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16"></line></svg> Middle</a>
-                                                            <a class="dropdown-item primary" href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-octagon"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16"></line></svg> Low</a>
-                                                        </div>
-                                                    </div>
+                                                    <p class="meta-date">{{ $use->created_at ? \Morilog\Jalali\Jalalian::fromCarbon(\Carbon\Carbon::parse($use->created_at))->format('j F Y') : 'منتشر نشده' }}</p>
+                                                    <p class="todo-text" >این دانشجو با کد {{ $use->student_id }} ثبت نام کرده است</p>
                                                 </div>
 
                                                 <div class="action-dropdown custom-dropdown-icon">
@@ -433,11 +420,8 @@
                                                         </a>
 
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink-19">
-                                                            <a class="edit dropdown-item" href="javascript:void(0);">Edit</a>
-                                                            <a class="important dropdown-item" href="javascript:void(0);">Important</a>
-                                                            <a class="dropdown-item delete" href="javascript:void(0);">Delete</a>
-                                                            <a class="dropdown-item permanent-delete" href="javascript:void(0);">Permanent Delete</a>
-                                                            <a class="dropdown-item revive" href="javascript:void(0);">Revive Task</a>
+                                                            <a class="edit dropdown-item" href="javascript:void(0);">ویرایش دانشجو</a>                  
+                                                            <a class="dropdown-item delete" href="javascript:void(0);">حذف</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -587,7 +571,7 @@
 
                                          {{-- ---------------------------------------------------notice start------------------------------------------- --}}
                                          <div class="todo-item todo-task-important">
-                                            <a class="btn" id="addTask" href="{{ route('AddNotice') }}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>اطلاعیه جدید</a>
+                                            <a class="btn" id="addTask" href="{{ route('AddNotice') }}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>مدیریت اطلاعیه ها</a>
                                             @foreach($notice as $notices)
                                             <div class="todo-item-inner">
                                                 <div class="n-chk text-center">
@@ -598,7 +582,7 @@
                                                 </div>
                                                
                                                 <div class="todo-content">
-                                                    <h5 class="todo-heading" data-todoHeading="New User Registered">{{ $notices->title }}</h5>
+                                                    <h5 class="todo-heading" data-todoHeading="New User Registered">{{ $notices->Title }}</h5>
                                                     <p class="meta-date"> {{ $notices->created_at ? \Morilog\Jalali\Jalalian::fromCarbon(\Carbon\Carbon::parse($notices->created_at))->format('j F Y') : 'منتشر نشده' }}</p>
                                                 </div>
                                                
@@ -641,47 +625,7 @@
                         </div>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog" aria-labelledby="addTaskModalTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close" data-dismiss="modal"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                                        <div class="compose-box">
-                                            <div class="compose-content" id="addTaskModalTitle">
-                                                <h5 class="">Add Task</h5>
-                                                <form>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="d-flex mail-to mb-4">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3 flaticon-notes"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-                                                                <div class="w-100">
-                                                                    <input id="task" type="text" placeholder="Task" class="form-control" name="task">
-                                                                    <span class="validation-text"></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="d-flex  mail-subject mb-4">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text flaticon-menu-list"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                                                        <div class="w-100">
-                                                            <div id="taskdescription" class=""></div>
-                                                            <span class="validation-text"></span>
-                                                        </div>
-                                                    </div>
-
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
-                                        <button class="btn add-tsk">Add Task</button>
-                                        <button class="btn edit-tsk">Save</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                       
                         
                     </div>
                 </div>

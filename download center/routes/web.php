@@ -41,6 +41,8 @@ Route::middleware(['auth', RoleMiddleware::class . ':admin'])
 
         Route::get('/AdminProfile/AddNotice', [AdminController::class, 'AddNotice'])->name('AddNotice');
         Route::post('/AdminProfile/AddNotice/insertNotice', [AdminController::class, 'insertNotice'])->name('insertNotice');
+
+        Route::get('/AdminProfile/AddNewFile', [AdminController::class, 'AddNewFile'])->name('AddNewFile');
             
         
     });

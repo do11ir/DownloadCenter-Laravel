@@ -8,7 +8,6 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}"/>
     <link href="{{ asset('assets/css/loader.css') }}" rel="stylesheet" type="text/css" />
     <script src="{{ asset('assets/js/loader.js') }}"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&display=swap" rel="stylesheet">
@@ -323,31 +322,7 @@ dropdown.addEventListener("click", function (e) {
     });
 </script>
 
-<script>
-    ClassicEditor
-        .create(document.querySelector('#editor'), {
-            ckfinder: {
-                uploadUrl: "{{ route('ckeditor.upload' , ['_token' => csrf_token()]) }}",
-            }
-        })
-        .then(editor => {
-            editor.ui.view.editable.element.style.height = '650px';
-            editor.ui.view.editable.element.style.backgroundColor = '#1e1e2f';
-            editor.ui.view.editable.element.style.color = '#fff';
-            editor.ui.view.editable.element.style.borderRadius = '8px';
-            editor.ui.view.editable.element.style.padding = '15px';
-        })
-        .catch(error => {
-            console.error(error);
-        });
-</script>
-<script>
-    document.querySelector('.custom-file-input').addEventListener('change', function(e) {
-        var fileName = document.getElementById("notice_image").files[0].name;
-        var nextSibling = e.target.nextElementSibling
-        nextSibling.innerText = fileName
-    })
-</script>
+
 
 </body>
 </html>

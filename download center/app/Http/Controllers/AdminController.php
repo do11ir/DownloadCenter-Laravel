@@ -86,59 +86,45 @@ class AdminController extends Controller
         return view('AdminViews.AddNotice' , compact('user' , 'studyField' , 'subject' , 'notice'));
     }
 
-    public function insertNotice(Request $request)
-    {
-        $request->validate([
-            'Title' => 'required|string|max:255',
-            'Content' => 'required',
-            'Image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
-        ]);
-    
-        // ذخیره تصویر شاخص اگر موجود بود
-        $imagePath = null;
-        if ($request->hasFile('image')) {
-            $imagePath = time() . '-' . $request->file('image')->getClientOriginalName();
-            $request->file('image')->move(public_path('img'), $imagePath);
-        }
-    
-       
-        notice::create([
-            'Title' => $request->title,
-            'Content' => $request->content,
-            'Author_Name' => Auth::user()->name,
-            'Image' => $imagePath,
-            'Field_Category' => $request->field_category
-        ]);
-    
-        return redirect()->route('AdminProfile')->with('success', 'اطلاعیه جدید ایجاد شد.');
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-    /*--------------------------this is only for text editor-------------------*/
-public function upload(Request $request)
+   public function insertNotice(Request $request)
 {
-    if ($request->hasFile('upload')) {
-        $originName = $request->file('upload')->getClientOriginalName();
-        $fileName = pathinfo($originName, PATHINFO_FILENAME);
-        $extension = $request->file('upload')->getClientOriginalExtension();
-        $fileName = $fileName . '_' . time() . '.' . $extension;
+    // 1. Validation با نام فیلدهای فرم (حروف کوچک)
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'content' => 'required',
+        'image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
+    ]);
 
-        $request->file('upload')->move(public_path('img'), $fileName);
-
-        $url = asset('img/' . $fileName);
-        return response()->json(['fileName' => $fileName, 'uploaded' => 1, 'url' => $url]);
+    // 2. ذخیره تصویر اگر وجود داشته باشد
+    $imagePath = null;
+    if ($request->hasFile('image')) {
+        $imagePath = time() . '-' . $request->file('image')->getClientOriginalName();
+        $request->file('image')->move(public_path('img'), $imagePath);
     }
 
-    return response()->json(['uploaded' => 0, 'error' => ['message' => 'No file uploaded']]);
+    // 3. ذخیره در پایگاه‌داده با رعایت حروف بزرگ مطابق ستون‌های جدول
+    notice::create([
+        'Title' => $request->title,
+        'Content' => $request->content,
+        'Author_Name' => Auth::user()->name,
+        'Image' => $imagePath,
+        'Field_Category' => $request->field_category
+    ]);
+
+    return redirect()->route('AdminProfile')->with('success', 'اطلاعیه جدید ایجاد شد.');
 }
+
+  public function AddNewFile()
+  {
+        $notice = notice::all();
+        $studyField = studyField::all();
+        $subject = subject::all();
+
+    return view('AdminViews.AddNewFile' , compact('studyField' , 'subject' , 'notice'));
+  }
+
+
+
+
+
 }
